@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+:root{
+
+font-family: 'Inter', sans-serif;
+
+}
+
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+
+body{
+
+margin:0;
+padding:0;
+
+background:#ffffff;
+
+color:#111827;
+
+}
+
+
+.container{
+
+width:90%;
+max-width:1280px;
+
+margin:auto;
+
+}
+
+
+.section-padding{
+
+padding-top:80px;
+padding-bottom:80px;
+
+}
+
+
+button{
+
+cursor:pointer;
+
+}
+
+/* Reusable input style used in admin forms */
+.input{
+  display: block;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.input:focus{
+  border-color: #2563eb;
+}
+.input{
+
+width:100%;
+border:1px solid #ddd;
+padding:12px;
+border-radius:12px;
+outline:none;
+
+}

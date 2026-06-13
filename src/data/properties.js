@@ -1,0 +1,48 @@
+const properties = [
+  {
+    id: 1,
+    title: "Luxury Modern Villa",
+    location: "Goa, India",
+    price: "₹85 Lakhs",
+    type: "Villa",
+    size: 3000,
+    bedrooms: 4,
+    bathrooms: 3,
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+  },
+  {
+    id: 2,
+    title: "Premium Apartment",
+    location: "Delhi, India",
+    price: "₹55 Lakhs",
+    type: "Apartment",
+    size: 1800,
+    bedrooms: 3,
+    bathrooms: 2,
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+  },
+  {
+    id: 3,
+    title: "Family House",
+    location: "Punjab, India",
+    price: "₹70 Lakhs",
+    type: "House",
+    size: 2500,
+    bedrooms: 4,
+    bathrooms: 3,
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80",
+  },
+  {
+    id: 4,
+    title: "Luxury Office Space",
+    location: "Mumbai, India",
+    price: "₹1.5 Crore",
+    type: "Office",
+    size: 4000,
+    bedrooms: 0,
+    bathrooms: 2,
+    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
+  },
+];
+
+export default properties;

@@ -1,0 +1,72 @@
+const express=require("express");
+const mongoose=require("mongoose");
+const cors=require("cors");
+require("dotenv").config();
+
+
+const app=express();
+
+
+
+app.use(cors());
+
+app.use(express.json());
+
+
+
+
+
+app.get("/",(_req,res)=>{
+
+res.send(
+"EstatePro Backend Running"
+);
+
+});
+const authRoutes=
+require("./routes/authRoutes");
+
+
+app.use(
+"/api/auth",
+authRoutes
+);
+
+
+
+
+const propertyRoutes=
+require("./routes/propertyRoutes");
+
+
+
+app.use(
+"/api/properties",
+propertyRoutes
+);
+
+mongoose.connect(process.env.MONGO_URI)
+
+.then(()=>{
+
+console.log(
+"MongoDB Connected"
+);
+
+
+app.listen(5000,()=>{
+
+console.log(
+"Server running on port 5000"
+);
+
+});
+
+
+})
+
+.catch((error)=>{
+
+console.log(error);
+
+});
