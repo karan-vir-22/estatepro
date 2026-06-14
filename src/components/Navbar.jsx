@@ -93,9 +93,7 @@ Contact
 </Link>
 
 <Link
-
-to="/admin/login"
-
+to="/admin/dashboard"
 className="
 bg-blue-600
 text-white
@@ -105,11 +103,8 @@ rounded-xl
 hover:bg-blue-700
 transition
 "
-
 >
-
-Admin Login
-
+Admin
 </Link>
 
 
