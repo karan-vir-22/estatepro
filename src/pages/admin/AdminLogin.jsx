@@ -1,45 +1,40 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import API from "../../api/axios";
 
 
 export default function AdminLogin(){
 
 
-const navigate=useNavigate();
+const navigate = useNavigate();
 
 
-const [username,setUsername]=useState("");
+const [username,setUsername] = useState("");
 
-const [password,setPassword]=useState("");
+const [password,setPassword] = useState("");
 
-const [error,setError]=useState("");
-
-
+const [error,setError] = useState("");
 
 
-const handleLogin=async(e)=>{
+
+
+const handleLogin=(e)=>{
 
 
 e.preventDefault();
 
 
-try{
 
+if(
+username === "admin" &&
+password === "admin123"
+)
 
-const res=await API.post(
-"/auth/login",
 {
-username,
-password
-}
-);
-
 
 
 localStorage.setItem(
-"token",
-res.data.token
+"admin",
+"true"
 );
 
 
@@ -47,14 +42,15 @@ res.data.token
 navigate("/admin/dashboard");
 
 
-
 }
 
-catch(error){
+else{
+
 
 setError(
 "Invalid username or password"
 );
+
 
 }
 
@@ -86,6 +82,7 @@ max-w-md
 ">
 
 
+
 <h1 className="
 text-3xl
 font-bold
@@ -96,6 +93,8 @@ mb-8
 Admin Login
 
 </h1>
+
+
 
 
 
@@ -117,23 +116,30 @@ mb-4
 
 
 
+
 <form
 onSubmit={handleLogin}
 >
 
 
 
+
 <input
+
 
 type="text"
 
+
 placeholder="Username"
 
+
 value={username}
+
 
 onChange={(e)=>
 setUsername(e.target.value)
 }
+
 
 className="
 border
@@ -148,17 +154,24 @@ mb-4
 
 
 
+
+
 <input
+
 
 type="password"
 
+
 placeholder="Password"
 
+
 value={password}
+
 
 onChange={(e)=>
 setPassword(e.target.value)
 }
+
 
 className="
 border
@@ -173,7 +186,13 @@ mb-6
 
 
 
+
+
 <button
+
+
+type="submit"
+
 
 className="
 bg-blue-600
@@ -192,7 +211,36 @@ Login
 </button>
 
 
+
+
 </form>
+
+
+
+<div className="
+mt-6
+text-center
+text-sm
+text-gray-500
+">
+
+
+<p>
+Demo Login
+</p>
+
+<p>
+Username: admin
+</p>
+
+<p>
+Password: admin123
+</p>
+
+
+</div>
+
+
 
 
 </div>

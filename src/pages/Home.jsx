@@ -3,7 +3,7 @@ import { Search, Home as HomeIcon, ShieldCheck, Users } from "lucide-react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
+import {Link} from "react-router-dom";
 import "swiper/css";
 
 
@@ -60,6 +60,29 @@ backgroundImage:
 
 }}
 >
+
+    <Link
+
+to="/admin/login"
+
+className="
+inline-block
+mt-6
+bg-white
+text-blue-600
+px-8
+py-3
+rounded-xl
+font-semibold
+hover:bg-gray-100
+transition
+"
+
+>
+
+Admin Login
+
+</Link>
 
 
 <div className="
