@@ -73,3 +73,12 @@ console.log(
 console.log(error);
 
 });
+
+const enquiryRoutes=
+require("./routes/enquiryRoutes");
+
+
+app.use(
+"/api/enquiries",
+enquiryRoutes
+);

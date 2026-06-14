@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
-import { getProperties, deleteProperty } from "../../api/propertyApi";
+import { 
+getProperties,
+deleteProperty,
+getEnquiries,
+deleteEnquiry
+
+} from "../../api/propertyApi";
 import { Link } from "react-router-dom";
+
 
 
 
@@ -8,7 +15,53 @@ export default function AdminDashboard(){
 
 
 const [properties,setProperties]=useState([]);
+const [enquiries,setEnquiries]=useState([]);
 
+const fetchEnquiries=async()=>{
+
+
+try{
+
+
+const res=await getEnquiries();
+
+
+setEnquiries(res.data);
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+};
+
+const handleDeleteEnquiry=async(id)=>{
+
+
+const confirmDelete=
+window.confirm(
+"Delete enquiry?"
+);
+
+
+
+if(!confirmDelete)
+return;
+
+
+
+await deleteEnquiry(id);
+
+
+fetchEnquiries();
+
+
+};
 
 
 const fetchProperties=async()=>{
@@ -30,10 +83,13 @@ console.log(error);
 };
 
 
-
 useEffect(()=>{
 
+
 fetchProperties();
+
+fetchEnquiries();
+
 
 },[]);
 
@@ -350,6 +406,120 @@ Delete
 
 </div>
 
+<div className="
+bg-white
+rounded-2xl
+shadow
+p-6
+mt-10
+">
+
+
+<h2 className="
+text-2xl
+font-bold
+mb-6
+">
+
+Customer Enquiries
+
+</h2>
+
+
+
+<div className="
+space-y-5
+">
+
+
+{
+
+enquiries.map((item)=>(
+
+
+<div
+
+key={item._id}
+
+className="
+border
+rounded-xl
+p-5
+"
+
+
+>
+
+
+<h3 className="
+font-bold
+text-xl
+">
+
+{item.name}
+
+</h3>
+
+
+
+<p>
+
+📧 {item.email}
+
+</p>
+
+
+
+<p>
+
+📞 {item.phone}
+
+</p>
+
+
+
+<p className="mt-3">
+
+{item.message}
+
+</p>
+
+
+
+<button
+
+onClick={()=>handleDeleteEnquiry(item._id)}
+
+className="
+bg-red-500
+text-white
+px-4
+py-2
+rounded-lg
+mt-4
+"
+
+>
+
+Delete
+
+</button>
+
+
+</div>
+
+
+))
+
+
+}
+
+
+
+</div>
+
+
+</div>
 
 </div>
 

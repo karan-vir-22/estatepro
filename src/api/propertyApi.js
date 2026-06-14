@@ -37,3 +37,26 @@ export const updateProperty=(id,data)=>{
 return API.put(`/properties/${id}`,data);
 
 };
+
+export const sendEnquiry=(data)=>{
+
+return API.post(
+"/enquiries",
+data
+);
+
+};
+
+export const getEnquiries = ()=>{
+
+return API.get("/enquiries");
+
+};
+
+
+
+export const deleteEnquiry=(id)=>{
+
+return API.delete(`/enquiries/${id}`);
+
+};
