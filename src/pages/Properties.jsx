@@ -1,31 +1,133 @@
 import {useState} from "react";
+import {useSearchParams} from "react-router-dom";
 
 import PropertyCard from "../components/PropertyCard";
-
 import propertiesData from "../data/properties";
-
 import PageHeader from "../components/PageHeader";
 
 
 export default function Properties(){
 
 
+const [searchParams] = useSearchParams();
+
+
 const [type,setType]=useState("All");
 
 
-const filteredProperties =
 
-type==="All"
+const searchLocation =
+searchParams.get("location") || "";
 
-?
 
-propertiesData
+const searchType =
+searchParams.get("type") || "";
 
-:
 
-propertiesData.filter(
-item=>item.type===type
+const searchPrice =
+searchParams.get("price") || "";
+
+
+
+
+
+const filteredProperties = propertiesData.filter((item)=>{
+
+
+// dropdown filter
+
+const typeMatch =
+type==="All" ||
+item.type===type;
+
+
+
+// search location filter
+
+const locationMatch =
+searchLocation==="" ||
+item.location
+.toLowerCase()
+.includes(
+searchLocation.toLowerCase()
 );
+
+
+
+
+// search type filter
+
+const searchTypeMatch =
+searchType==="" ||
+item.type===searchType;
+
+
+
+
+// price filter
+
+let priceMatch=true;
+
+
+if(searchPrice){
+
+
+const price=Number(
+item.price
+.replace(/[^0-9]/g,"")
+);
+
+
+
+if(searchPrice.includes("+")){
+
+
+const min =
+Number(
+searchPrice.replace("+","")
+);
+
+
+priceMatch =
+price>=min;
+
+
+}
+
+else{
+
+
+const [min,max]=
+searchPrice.split("-");
+
+
+priceMatch =
+price>=Number(min)
+&&
+price<=Number(max);
+
+
+}
+
+
+}
+
+
+
+return (
+
+typeMatch &&
+locationMatch &&
+searchTypeMatch &&
+priceMatch
+
+);
+
+
+
+});
+
+
 
 
 
@@ -41,6 +143,7 @@ title="Find Your Perfect Property"
 subtitle="Browse verified properties according to your needs"
 
 />
+
 
 
 
@@ -81,15 +184,16 @@ Filters
 
 
 
+
 <label>
-
 Property Type
-
 </label>
 
 
 
 <select
+
+value={type}
 
 onChange={(e)=>
 setType(e.target.value)
@@ -106,28 +210,34 @@ mt-2
 >
 
 
-<option>
+<option value="All">
 All
 </option>
 
-<option>
+
+<option value="Villa">
 Villa
 </option>
 
-<option>
+
+<option value="Apartment">
 Apartment
 </option>
 
-<option>
+
+<option value="House">
 House
 </option>
 
-<option>
+
+<option value="Office">
 Office
 </option>
 
 
+
 </select>
+
 
 
 </div>
@@ -139,7 +249,6 @@ Office
 {/* GRID */}
 
 
-
 <div className="
 md:col-span-3
 grid
@@ -149,7 +258,11 @@ gap-8
 ">
 
 
+
 {
+
+filteredProperties.length > 0 ?
+
 
 filteredProperties.map(property=>(
 
@@ -166,6 +279,18 @@ property={property}
 ))
 
 
+:
+
+<p className="
+text-gray-500
+">
+
+No properties found
+
+</p>
+
+
+
 }
 
 
@@ -178,6 +303,7 @@ property={property}
 
 
 </section>
+
 
 
 </>
